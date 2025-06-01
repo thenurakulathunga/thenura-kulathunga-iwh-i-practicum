@@ -32,6 +32,43 @@ app.get("/update-cobj", async (req, res) => {
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 app.post('/update-cobj', async (req, res) => {
+    const { name, model, type, fuel_type } = req.body;
+
+    if (!name) {
+        return res.status(400).send('Name is required');
+    }
+    if (!model) {
+        return res.status(400).send('Model is required');
+    }
+    if (!type) {
+        return res.status(400).send('Type is required');
+    }
+    if (!fuel_type) {
+        return res.status(400).send('Fuel type is required');
+    }
+
+    const newVehicle = {
+        properties: {
+            name,
+            model,
+            type,
+            fuel_type
+        }
+    };
+
+    const url = 'https://api.hubapi.com/crm/v3/objects/vehicles';
+    const headers = {
+        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+        'Content-Type': 'application/json'
+    };
+
+    try {
+        await axios.post(url, newVehicle, { headers });
+        res.redirect('/');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error creating or updating custom object');
+    }
 });
 
 /** 
