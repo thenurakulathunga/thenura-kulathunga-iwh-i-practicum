@@ -4,5 +4,22 @@ html
 		meta(name="viewport" content="width=device-width, initial-scale=1")
 		link(rel="stylesheet" href="/css/style.css")
 	body
-		h1 Home | Custom Object Table 
-		
+		h1 Home | Custom Object Table
+		table
+			thead
+				tr
+					th Name
+					th Type
+					th Model
+					th Fuel Type
+			tbody
+				if data && data.length
+					each vehicle in data
+						tr
+							td= vehicle.properties.name
+							td= vehicle.properties.type
+							td= vehicle.properties.model
+							td= vehicle.properties.fuel_type
+				else
+					tr
+						td(colspan="4") No vehicles found.
