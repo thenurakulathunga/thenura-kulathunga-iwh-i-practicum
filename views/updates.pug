@@ -1,0 +1,17 @@
+html
+	head 
+		title= `${title}`
+		meta(name="viewport" content="width=device-width, initial-scale=1")
+		link(rel="stylesheet" href="/css/style.css")
+	body
+		h1 Updates | Integrating With HubSpot I: Foundations Practicum
+		form(action="/update-cobj" method="POST")
+			label(for="name") Name:
+			input(type="text" id="name" name="name" required)
+			label(for="type") Type:
+			input(type="text" id="type" name="type" required)
+			label(for="model") Model:
+			input(type="text" id="model" name="model" required)
+			label(for="fuel_type") Fuel Type:
+			input(type="text" id="fuel_type" name="fuel_type" required)
+			button(type="submit") Add Vehicle
